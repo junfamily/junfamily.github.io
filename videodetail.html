@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Distribution</title>
+<link rel="stylesheet" type="text/css" href="css/css.css"/>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<SCRIPT type=text/javascript>
+var hwnd;
+var sCameraID = "";
+var sChannelID = "";
+var b_HasLogin=false;
+$(function () {
+	init();
+        Login();
+});
+
+//初始化OCx控件
+function init() {
+	hwnd = VOcx.Initial(0, 0, 625, 330, 0);
+	VOcx.SetWindowsNumber(1);
+	lResult = WebOcx.Initial(0);
+}
+//登陆方法
+function Login() {
+  var lcode = getRequestCode("id");
+  var ltext = readFile('D:/distribution/loglist.txt');
+  parseLogXml(ltext,lcode);
+}
+
+//退出平台
+function Free() {
+	WebOcx.Logout();
+	WebOcx.Free();
+}
+
+function Stop() {
+	WebOcx.StopVideo(hwnd);
+}
+
+function autoPlay() {
+	var TwoID = document.getElementById('videoList').value;
+	sCameraID = TwoID.substring(0, 18);
+	sChannelID = TwoID.substring(18, 20);
+	WebOcx.PlayVideo(hwnd, sCameraID, sChannelID);
+}
+
+function chgPlay() {
+	var TwoID = document.getElementById('videoList').value;
+	sCameraID = TwoID.substring(0, 18);
+	sChannelID = TwoID.substring(18, 20);
+	WebOcx.PlayVideo(hwnd, sCameraID, sChannelID);
+}
+function readFile(filename){
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var f = fso.OpenTextFile(filename,1);
+  var s = "";
+  while (!f.AtEndOfStream)
+  s += f.ReadLine()+"\n";
+  f.Close();
+  return s;
+}
+function getRequestCode(strParame)
+{
+  var args = new Object(); 
+  var query = location.search.substring(1); 
+  var pairs = query.split("&"); // Break at ampersand 
+  for(var i = 0; i < pairs.length; i++) { 
+  var pos = pairs[i].indexOf('='); 
+  if (pos == -1) continue; 
+  var argname = pairs[i].substring(0,pos); 
+  var value = pairs[i].substring(pos+1); 
+  value = decodeURIComponent(value); 
+  args[argname] = value; 
+  }
+  return args[strParame];
+}
+function parseLogXml(cString, cCode)
+{
+    var tmpStr_array = cString.split("$");
+    var logId;
+    var logPsd;
+    for (var i = 1;i < tmpStr_array.length; i++) 
+    {
+        var tmpStr_array2=tmpStr_array[i].split("|");
+        var tCode = tmpStr_array2[0];
+        if(tCode == cCode){
+            logId = tmpStr_array2[1];
+            logPsd = tmpStr_array2[3];
+        }
+    }
+    getin(logId, logPsd);
+}
+//登陆方法
+function getin(loginid, loginpsd) {
+  var lResult = 1;
+  lResult = WebOcx.Login("218.74.116.166", 6666, "", loginid, loginpsd);
+  if (lResult != 0) {
+    alert("登陆失败!");
+  } else {
+    b_HasLogin = true;
+  }
+}
+</SCRIPT>
+
+<SCRIPT language=javascript event=NotifyLoginMessageEx(lStatus); for=WebOcx>
+	//alert(lStatus);
+	if(lStatus == -2147220736)
+    {
+	   lResult = WebOcx.GetDeviceList();
+    }
+	else if(lStatus == -2147220735)
+    {
+       alert("登陆失败,用户名或密码错误!");
+    }
+    else{
+	   alert("登陆失败, 返回值为: "+lStatus);
+	}
+    
+</SCRIPT>
+
+<SCRIPT language=javascript event=NotifyLogoutMessage(lStatus); for=WebOcx>
+    //alert("Login returns "+lStatus);
+</SCRIPT>
+
+<SCRIPT language=javascript event=NotifyDeviceListMessage(sDeviceList); 
+for=WebOcx>	
+    //alert(sDeviceList);
+    FDListString11 = sDeviceList;
+    parseXml(FDListString11);
+</SCRIPT>
+
+<SCRIPT language=javascript event=NotifyChannelMessage(sChannels); for=WebOcx>
+    var ChannelListString = sChannels;	
+    addChild(ChannelListString);
+</SCRIPT>
+
+<SCRIPT language=javascript event="NotifyRecordMessage(sCameraID, sList);" 
+for=WebOcx>
+    getRecordList(sList);   
+</SCRIPT>
+
+<SCRIPT language=javascript 
+event="OnMessage(hWnd, sCameraID, lMsgID, sMessage);" for=WebOcx>
+    // if(lMsgID == -2147220736)
+    // alert("sMessage"+sMessage);
+</SCRIPT>
+
+<SCRIPT language=javascript event=OnChangeFocus(hWnd); for=VOcx>	
+    hwnd = hWnd;
+</SCRIPT>
+
+<SCRIPT language=javascript event="PlayVideo(sCameraID, sChannelID, Result);" 
+for=WebOcx>
+</SCRIPT>
+
+<SCRIPT language=javascript event="PlayAudio(sCameraID, Result);" for=WebOcx>
+</SCRIPT>
+
+<SCRIPT language=javascript event=NotifyPresetMessage(sPresets); for=WebOcx>
+//查询预设位响应事件
+    //alert(sPresets);
+</SCRIPT>
+
+<SCRIPT language=javascript event=ChangePlayWindowStatus(hWnd,lStatus); 
+for=WebOcx>
+    //窗口状态设置
+    VOcx.ChangePlayWindowStatus(hWnd,lStatus);
+</SCRIPT>
+
+<SCRIPT language=javascript event=StopVideo(hWnd); for=VOcx>
+//窗口关闭视频
+    WebOcx.StopVideo(hWnd);
+</SCRIPT>
+
+<SCRIPT language=javascript event=RecordDownloadSize(sFileName,sDownloadSize); 
+for=WebOcx>
+</SCRIPT>
+</head>
+
+<body onUnload="Free();">
+  <div class="Wrapper">
+    <div class="wrap">
+      <div class="Header"><h1 class="dislogo"></h1></div>
+      <div class="headPic" style="filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale,src=../images/video_s1.png);"></div>
+      <ul class="Navigation">
+        <li><a class="navLink" href="index.html">首页</a></li>
+        <li><a class="navLink" href="distribute.html">今日订单</a></li>
+        <li><a class="navLink" href="http://www.961355.com">呼叫服务</a></li>
+        <li><a class="navLink navLiClick" href="videopage.html">基地视频</a></li>
+        <li><a class="navLink" href="process.html">配送服务</a></li>
+        <li><a class="navLink" href="http://www.spjcgx.gov.cn">质量监控</a></li>
+      </ul>
+      <div class="Content">
+        <div class="videoHead"></div>
+        <div class="innerContent">
+          <ul class="partList">
+            <li class="allPart"><a class="apartLink" href="javascript:void(0);">全部分类>></a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">蔬&nbsp;&nbsp;菜</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">禽&nbsp;&nbsp;蛋</a></li>
+            <li class="childPart"><a class="partLink partLiClick" href="javascript:void(0);">水&nbsp;&nbsp;产</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">水&nbsp;&nbsp;果</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">肉&nbsp;&nbsp;类</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">粮油杂粮</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">食用菌</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">中药材</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">笋&nbsp;&nbsp;竹</a></li>
+            <li class="childPart"><a class="partLink" href="javascript:void(0);">油&nbsp;&nbsp;茶</a></li>
+          </ul>
+          <div class="innerRight">
+            <div class="finderBox">
+              <a href="###" class="pListMback">返回上一层</a>
+              <span class="pListCol">
+                <a href="###" class="pListMlink">首页</a>>>
+                <a href="###" class="pListMlink">基地视频</a>>>
+                <a href="###" class="pListMlink">全部</a>>>
+                <span class="pListMap">龙泉鸭蛋详细内容</span>
+                <SELECT id=pList onchange=parentList() name=pList></SELECT>
+                <SELECT id=videoList onchange=chgPlay() name=videoList></SELECT>
+              </span>
+            </div>
+            <div class="videoShow">
+              <div class="videoDraw">
+                <OBJECT id=WebOcx name=WebOcx codeBase=http://218.74.116.166/userfiles/webocx.rar height=0 width=0 classid=clsid:1ED44FB1-A30D-4172-80C6-A3558144B642 VIEWASTEXT></OBJECT>
+                <OBJECT id=VOcx name=VOcx height=0px width=0px classid=clsid:41574951-5BCE-4577-AAAB-70A8E3C2E891 VIEWASTEXT></OBJECT>
+              </div>
+              <div class="videoControl">
+                <h2 class="ctrHead">功能操作区</h2>
+                <div class="ctrBody">
+                  <div class="topCtr"><a href="javascript:void(0);" onmousedown="LenNear()" onmouseup="StopTurn()" class="ctrLong">拉近</a><a href="javascript:void(0);" onmousedown="TurnUp()" onmouseup="StopTurn()" class="ctrUp" title="向上"></a><a href="javascript:void(0);" class="ctrLong" onmousedown="LenFar()" onmouseup="StopTurn()" style="margin-left:20px;">推远</a></div>
+                  <div class="midCtr"><a href="javascript:void(0);" class="ctrLeft" onmousedown="TurnLeft()" onmouseup="StopTurn()" title="向左"></a><a href="javascript:void(0);" class="ctrMid" onclick="Stop();" title="停止视频"></a><a href="javascript:void(0);" class="ctrRight" onmousedown="TurnRight()" onmouseup="StopTurn()" title="向右"></a></div>
+                  <div class="endCtr"><a href="javascript:void(0);" class="ctrDown" onmousedown="TurnDown()" onmouseup="StopTurn()" title="向下"></a></div>
+                </div>
+                <div class="ctrFooter">
+                  <a href="javascript:void(0);" class="footCtr footCtr0">散焦</a>
+                  <a href="javascript:void(0);" class="footCtr footCtr2">自动</a>
+                  <a href="javascript:void(0);" class="footCtr footCtr0">聚焦</a>
+                </div>
+              </div>
+              <div class="cf"></div>
+            </div>
+            <div class="infoText">
+              <h2 class="infoThead"><a  href="javascript:void(0);" class="infoMore">更多>></a><span class="infoTitle">■天翼农庄详细概况</span></h2>
+              <div class="infoContent">
+                <p style="text-indent:2em;">天翼农庄位于遂昌县云峰镇社后村，一期占地100余亩，是遂昌丰源生态科技有限公司与中国电信遂昌分公司合作开发的集种养殖、餐饮娱乐接待为一体，同时辅以现代信息监控传输的现代农业园区，为大众提供农业休闲观光体验服务。</p>
+                <p style="text-indent:2em;">遂昌丰源生态科技有限公司成立于2003年，是一家专业的绿色生态养殖企业。公司一直秉承有机养殖的理念，十分注重产品质量，成为当地绿色生态养殖的领头企业。公司下属4个养殖基地，畜禽放养面积130余亩，常年存栏绿壳蛋鸡3万余羽，生产的绿色农产品深受消费者青睐。2009年公司被省农业厅命名为省无公害农产品产地，通过了国家无公害食品认证，先后获得"市级生态规模养殖场"、"市级残疾人扶贫示范基地"、"县级农业龙头企业"称</p>号。
+              </div>
+            </div>
+            <div class="infoText">
+              <h2 class="infoThead"><a href="javascript:void(0);" class="infoMore">更多>></a><span class="infoTitle">■基地图片</span></h2>
+              <div class="infoContent">
+                <div>
+                  <a href="javascript:void(0);" class="infoPLeft"></a>
+                  <div class="infoPBox">
+                    <a href="javascript:void(0);" class="infoPLink"><img src="images/picture/pic_r1.jpg" /></a>
+                    <a href="javascript:void(0);" class="infoPLink"><img src="images/picture/pic_r2.jpg" /></a>
+                    <a href="javascript:void(0);" class="infoPLink"><img src="images/picture/pic_r3.jpg" /></a>
+                    <a href="javascript:void(0);" class="infoPLink"><img src="images/picture/pic_r4.jpg" /></a>
+                    <a href="javascript:void(0);" class="infoPLink"><img src="images/picture/pic_r5.jpg" /></a>
+                  </div>
+                  <a href="javascript:void(0);" class="infoPRight"></a>
+                </div>
+                <div class="cf"></div>
+              </div>
+            </div>
+          </div>
+          <div class="cf"></div>
+        </div>
+      </div>
+    </div>
+    <div class="Footer">
+      <span class="footerFont">主办：丽水市农业局、市工商局、市食品安全委员会、市质量监督管理局</span>
+      <span class="footerFont">承办：丽水市农业合作社联合会、丽水市天虹农业科技有</span>
+    </div>
+  </div>
+  <script>
+  //解析字符串
+  function parseXml(cString)
+  {
+	  // 然后开始获取 fdInfo.xml 需要的的第一个节点的属性值
+	  var tmpStr_array =cString.split("$");
+          clearList("pList");
+	  for (var i = 1;i < tmpStr_array.length; i++) 
+	  {
+		  var tmpStr_array2=tmpStr_array[i].split("|");
+		  var fdId = tmpStr_array2[0];
+		  var fdName = tmpStr_array2[1];
+		  var Status = tmpStr_array2[3];
+		  var flag = false;
+		  if(Status == 0){
+			  flag = true;
+		  }else{
+			  flag = false;
+		  }
+		  setList("pList",fdName,fdId);
+	  }
+	  parentList();
+  }
+  function clearList(listId)
+  {
+    document.getElementById(listId).options.length = 0;
+  }
+  function parentList()
+  {
+	  var TwoID = document.getElementById('pList').value;
+	  var ChannelList = WebOcx.GetChannelList(TwoID);
+  }
+  
+  function addChild(ChannelListString)
+  {
+	  var chStr_array =ChannelListString.split("$");
+	  var childLength =chStr_array.length;
+          clearList("videoList");
+	  if (childLength > 0) {
+		  for (var j = 1;j < childLength; j++) {
+			  var chStr_array2=chStr_array[j].split("|");
+			  var channelId = chStr_array2[1];
+			  var channelName = chStr_array2[3];
+			  setList("videoList",channelName,channelId);
+		  }
+	  }
+	  autoPlay();
+  }
+  function setList(listId,Name,Value)
+  {
+	  var oOption = document.createElement("option");   
+	  oOption.appendChild(document.createTextNode(Name));   
+	  if (arguments.length == 3) {   
+		  oOption.setAttribute("value", Value);   
+	  }
+	  document.getElementById(listId).appendChild(oOption);
+  }
+  
+  //云台上转
+  function TurnUp()
+  {
+	  WebOcx.PTZControlEx(hwnd,1,5);
+   
+  }
+  //云台下转
+  function TurnDown()
+  { 
+	  WebOcx.PTZControlEx(hwnd,2,5);
+  }		
+  //云台的左转
+  function TurnLeft()
+  {       
+	 WebOcx.PTZControlEx(hwnd,3,5);
+  }
+  //云台的右转
+  function TurnRight()
+  {    
+	  WebOcx.PTZControlEx(hwnd,4,5);
+  }
+  
+  //变亮
+  function Brighten()
+  {
+	  WebOcx.PTZControlEx(hwnd,5,5);
+  }
+  //变暗
+  function Darken()
+  {
+	  WebOcx.PTZControlEx(hwnd,6,5);
+  }
+  //停止转动
+  function StopTurn()
+  {
+	  WebOcx.PTZControlEx(hwnd,0,5);
+	  
+  }
+  //拉远镜头
+  function LenFar()
+  {
+	  WebOcx.PTZControlEx(hwnd,8,5);
+  }
+  //拉近镜头
+  function LenNear()
+  {
+	  WebOcx.PTZControlEx(hwnd,7,5);
+  }
+  //改变窗口数目
+  function changeScreen(lWndNumber)
+  {	 
+	  VOcx.SetWindowsNumber(lWndNumber);	 
+  }
+  //改变窗口数目
+  function changeScreen1(lWndNumber)
+  {	 
+	  VOcx1.SetWindowsNumber(lWndNumber);	 
+  }
+  </script>
+</body>
+</html>

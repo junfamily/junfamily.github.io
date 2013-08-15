@@ -1,0 +1,30 @@
+// JavaScript Document
+$(document).ready(function(){
+  $('.fLinks').click(function(){
+	  $('.fLinks').removeClass('posLkc');
+	  $(this).addClass('posLkc');
+  });
+  $('.seLinks').click(function(){
+	  $('.seLinks').removeClass('inposLkc');
+	  $(this).addClass('inposLkc');
+  });
+  $('.thLinks').click(function(){
+	  $('.thLinks').removeClass('inposLkc');
+	  $(this).addClass('inposLkc');
+  });
+  $('.foLinks').click(function(){
+	  $('.foLinks').removeClass('inposLkc');
+	  $(this).addClass('inposLkc');
+  });
+  $('.fbtnLink').click(function(){
+	  $('.fbtnLink').removeClass('fbtnLc');
+	  $('.fbtnBox').removeClass('fbtnS').removeClass('fbtnT');
+	  $(this).addClass('fbtnLc');
+  });
+  $('#fbtnS').click(function(){
+	  $('.fbtnBox').addClass('fbtnS');
+  });
+  $('#fbtnT').click(function(){
+	  $('.fbtnBox').addClass('fbtnT');
+  });
+});

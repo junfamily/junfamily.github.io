@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* CSS Document */
+html{background:#FFF;color:#000;}
+body,form,ul,ol,li,p,dl,dt,dd,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+body{font:12px/1.5 "\5b8b\4f53",Verdana;text-align:center;}
+img{border:0;}
+img, div, input { behavior: url("css/iepngfix.htc")}
+table{border-collapse:collapse;border-spacing:0;}
+li{list-style-type:none;}
+input,select,textarea{font-size:12px;}
+a{text-decoration:none;}
+
+.cf{clear:both;}
+.floatl{float:left;}
+
+.Wrapper{background:url(../images/headbg.jpg) repeat-x;}
+.wrap{width:1003px;margin:0 auto;}
+
+/* index */
+.inWrapper{min-width:1000px;}
+.inHeader{background:url(../images/indexbg_01.jpg) no-repeat center 0;height:215px;}
+.inmidContent{background:url(../images/indexbg_02.jpg) no-repeat center 0;height:213px;}
+.inbtnList{padding-top:80px;width:1000px;margin:0 auto;}
+.inbtnlink{width:115px;height:115px;display:inline-block;margin:0 8px;}
+.orderico{background:url(../images/indexbtn_01.jpg) no-repeat;}
+.callico{background:url(../images/indexbtn_02.jpg) no-repeat;}
+.videoico{background:url(../images/indexbtn_03.jpg) no-repeat;}
+.distributeico{background:url(../images/indexbtn_04.jpg) no-repeat;}
+.checkico{background:url(../images/indexbtn_05.jpg) no-repeat;}
+.inendContent{background:url(../images/indexbg_03.jpg) no-repeat center 0;height:231px;}
+.inFooter{background:url(../images/indexbg_04.jpg) no-repeat center 0;height:50px;padding-top:191px;}
+
+/* Header */
+.Header{height:92px;}
+.dislogo{background:url(../images/dislogo.jpg) no-repeat 20px center;height:92px;}
+.headPic{background:url(../images/video_s1.png) no-repeat !important;width:237px;height:160px;margin:-40px 0 0 766px;position:absolute;_background:url(../images/video_s1.gif) no-repeat;}
+
+/* Navigation */
+.Navigation{line-height:36px;height:36px;padding:0 25px;}
+.Navigation li{font-size:14px;float:left;}
+.navLink{color:#FFF;padding:0 12px;display:block;}
+.navLink:hover{background:#FB6A01;}
+.navLiClick{background:#FB6A01;}
+
+/* Content */
+.Content{min-height:500px;width:1003px;}
+.videoHead{background:url(../images/videohd.jpg) no-repeat 20px center;height:84px;border-bottom:1px dashed #B6B6B6;}
+.innerContent{padding:12px 0 30px 12px;}
+.partList{width:105px;height:530px;float:left;background:#0168B7;}
+.allPart{height:28px;line-height:28px;background:#FB6A01;}
+.childPart{height:32px;line-height:32px;border-bottom:1px dashed #1C77BD;}
+.apartLink{width:105px;height:28px;color:#FFF;display:block;}
+.partLink{width:105px;height:32px;color:#FFF;display:block;}
+.partLink:hover{background:url(../images/partico.jpg) no-repeat 75px 8px #187FCC;}
+.partLiClick{background:url(../images/partico.jpg) no-repeat 75px 8px #187FCC;}
+
+.innerRight{float:left;padding-left:10px;width:875px;}
+.finderBox{border:1px solid #D4D4D4;width:840px;height:20px;line-height:20px;padding:8px 15px;text-align:left;}
+.findText{float:left;}
+.findDList{width:80px;float:left;margin-right:15px;}
+.pListLi{padding:8px 12px;float:left;}
+.pListPic{width:190px;height:190px;border:1px solid #CACACA;overflow:hidden;display:block;}
+.pListLink{width:190px;line-height:30px;height:30px;color:#000;font-size:14px;border:1px solid #C8C8C8;display:block;margin-top:5px;}
+.pageText{color:#444;float:right;padding:0 5px;}
+.pageLink{float:right;padding:0 5px;}
+.pLenable{color:#EA2340;}
+.pLdisable{color:#0269B8;}
+.pageInput{width:40px;text-align:center;border:none;border-bottom:1px solid #ABABAB;}
+
+.pListCol{color:#2A7FB5;}
+.pListMlink{color:#2A7FB5;}
+.pListMlink:hover{text-decoration:underline;}
+.pListMap{color:#E46000;}
+.pListMback{float:right;color:#E46000;}
+
+/* videopage */
+.videoShow{padding:15px 0;}
+.videoDraw{width:625px;height:330px;border:1px solid #BEBEBE;float:left;}
+.videoControl{width:238px;height:330px;float:right;}
+.ctrHead{background:#AACCE7;padding-left:10px;height:24px;text-align:left;font-weight:bold;font-size:14px;}
+.ctrBody{height:205px;background:url(../images/controlbg.jpg) no-repeat center 25px #E4EEF7;padding-top:30px;text-align:left;}
+.topCtr{height:52px;}
+.ctrLong{color:#FFF;width:39px;line-height:39px;float:left;margin:5px 0 0 33px;text-align:center;}
+.ctrLong:hover{background:url(../images/ctraico.jpg) no-repeat;}
+.ctrUp{width:52px;height:52px;float:left;margin-left:21px;}
+.ctrUp:hover{background:url(../images/ctrico.jpg) 108px 0;}
+.midCtr{padding-top:11px;height:52px;clear:both;}
+.ctrLeft{width:52px;height:52px;float:left;margin-left:35px;}
+.ctrLeft:hover{background:url(../images/ctrico.jpg) 0 108px;}
+.ctrMid{width:52px;height:52px;float:left;margin-left:7px;}
+.ctrMid:hover{background:url(../images/ctrstop.jpg);}
+.ctrRight{width:52px;height:52px;float:left;margin-left:7px;}
+.ctrRight:hover{background:url(../images/ctrico.jpg) -114px 108px;}
+.endCtr{padding-top:7px;clear:both;}
+.ctrDown{width:52px;height:52px;float:left;margin-left:94px;}
+.ctrDown:hover{background:url(../images/ctrico.jpg) 108px bottom;}
+.ctrFooter{background:url(../images/ctrsbg.jpg) no-repeat;height:71px;overflow:hidden;}
+.footCtr{padding-bottom:35px;line-height:36px;width:78px;float:left;margin-left:1px;}
+.footCtr0{color:#403F44;}
+.footCtr1{background:url(../images/ctrsico.jpg);color:#FFF;}
+.footCtr2{background:url(../images/ctrsico.jpg) -81px 0;color:#FFF;}
+.footCtr3{background:url(../images/ctrsico.jpg) 161px 0;color:#FFF;}
+
+.infoText{padding:15px 0;}
+.infoThead{color:#0168B7;border-bottom:2px solid #626262;line-height:30px;height:30px;text-align:left;padding:0 10px;}
+.infoTitle{font-size:14px;font-weight:bold;}
+.infoMore{float:right;color:#616161;}
+.infoContent{padding:15px;text-align:left;line-height:24px;}
+.infoPLeft{background:url(../images/pic_left.jpg) no-repeat 0 center;width:21px;height:110px;float:left;}
+.infoPBox{width:780px;padding:0 10px;height:110px;overflow:hidden;float:left;}
+.infoPRight{background:url(../images/pic_right.jpg) no-repeat 0 center;width:21px;height:110px;float:left;}
+.infoPLink{background:url(../images/picbg.jpg);padding:5px;display:inline-block;margin:0 5px;}
+
+/* Process */
+.proHead{background:url(../images/prohead.jpg) no-repeat 20px center;height:84px;border-bottom:1px dashed #B6B6B6;}
+.proService{background:url(../images/servicepic.jpg) no-repeat center 10px;height:350px;}
+.proCenter{background:url(../images/centerpro.jpg) no-repeat center 10px;height:580px;}
+
+/* distribute */
+.distriHead{background:url(../images/distriHead.jpg) no-repeat 20px center;height:84px;border-bottom:1px dashed #B6B6B6;}
+.disWrap{border:1px solid #E6E6E6;margin-top:8px;}
+.distriTitle{height:28px;line-height:28px;font-size:14px;border-bottom:1px solid #E6E6E6;background:url(../images/diractionico.jpg) no-repeat #F2F2F2;padding-left:70px;}
+.addPosition{color:#3566CC;float:left;}
+.disTiSpan{color:#52607B;float:left;}
+.disContent{padding:12px;}
+.disCList{border-bottom:1px dashed #EEE;*border:none;color:#808080;line-height:24px;padding:6px 0;text-align:left;clear:both;}
+.disCList dd{width:850px;float:left;clear:right;}
+.disCTitle{float:left;color:#3D4140;font-weight:bold;width:80px;text-align:center;}
+.posLink{color:#5D5D5D;padding:0 8px;margin:1px 3px;text-align:center;float:left;}
+.posLkc{color:#FFF;background:url(../images/posback.jpg) no-repeat center 2px;}
+.inposLink{color:#5D5D5D;padding:0 5px;margin:1px 6px;float:left;}
+.inposLkc{color:#FFF;background:#FF8520;}
+
+.disConTit{border:1px solid #E6E6E6;border-top:1px solid #FE7320;background:url(../images/distitlebg.jpg) repeat-x 0 0;height:24px;margin:8px 0;line-height:24px;padding:7px 15px;text-align:left;color:#40403E;}
+.fbtnBox{background:url(../images/disbtnbg.jpg) no-repeat;height:20px;margin:2px 0;width:178px;_width:180px;float:left;}
+.fbtnS{background-position:0 center;}
+.fbtnT{background-position:0 bottom;}
+.fbtnLink{color:#666;width:49px;_width:59px;line-height:20px;padding-left:10px;float:left;overflow:hidden;}
+.fbtnLc{color:#FB731D;}
+.disFbox{padding:0 8px;float:left;}
+.disSearch{background:url(../images/searico.jpg) no-repeat 8px center #FFF;float:right;}
+.disSinput{border:1px solid #BABABA;border-right:none;height:20px;width:160px;background:transparent;padding-left:24px;float:left;}
+.disSbtn{color:#666;border:1px solid #BABABA;width:50px;height:22px;text-align:center;float:left;}
+.disConLi{min-height:300px;padding-bottom:50px;}
+.disListLi{padding:8px 4px;float:left;}
+.disListTil{margin-left:8px;float:left;}
+.disListPri{margin-right:8px;color:red;font-weight:bold;float:right;}
+
+
+/* Footer */
+.Footer{height:50px;background:#1C58BA;}
+.footerFont{color:#FFF;line-height:50px;padding:0 8px;}
+
+
+
+
+
+
+
+
+
+
+
+

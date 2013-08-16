@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="robots" content="NONE,NOARCHIVE">
   <title>Welcome to Lsyoo</title>
   <style type="text/css">
-    html * { padding:0; margin:0; }
-    body * { padding:10px 20px; }
-    body * * { padding:0; }
+    html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, 
+a, img,  ul, li,
+table, tr, th, td，tbody,thead { margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
     body { font:small sans-serif; }
-    body>div { border-bottom:1px solid #ddd; }
+    body>div { border-bottom:1px solid #ddd;padding:10px 20px; }
     h1 { font-weight:normal; }
     h2 { margin-bottom:.8em; }
     h2 span { font-size:80%; color:#666; font-weight:normal; }
@@ -20,13 +21,21 @@
     thead th { padding:1px 6px 1px 3px; background:#fefefe; text-align:left; font-weight:normal; font-size:11px; border:1px solid #ddd; }
     tbody th { width:12em; text-align:right; color:#666; padding-right:.5em; }
     ul { margin-left: 2em; margin-top: 1em; }
+    ol, ul{list-style: none;}
+    table{border-collapse:collapse;border-spacing:0;}
+    a{text-decoration:none;}
     #summary { background: #e0ebff; }
     #summary h2 { font-weight: normal; color: #666; }
     #explanation { background:#eee; }
     #instructions { background:#f6f6f6; }
     #summary table { border:none; background:transparent; }
+    /*product*/
+    .product li{float: left;display: inline;margin: 0 10px;}
+    .product img{display: block;}
+    .product a{border:2px solid #d1d2d4;display: block;}
+    .product a:hover{border:2px solid #1e90ff;}
   </style>
-<link type="text/css" rel="stylesheet" href="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://cpngackimfmofbokmjmljamhdncknpmg/page_context.js"></script></head>
+</head>
 
 <body screen_capture_injected="true">
 <div id="summary">
@@ -47,5 +56,9 @@
      Get to work!
   </p>
 </div>
+<ul class="product">
+  <li><a href="sq/"><img src="img/sq.png"></a></li>
+  <li><a href="shop/"><img src="img/shop.png"></a></li>
+</ul>
 
 </body></html>
